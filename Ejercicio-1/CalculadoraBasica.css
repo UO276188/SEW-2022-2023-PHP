@@ -1,0 +1,66 @@
+/*Especificidad: 001*/
+body {
+	background-color: #000;
+    color: #fff;
+}
+
+/*Especificidad: 001*/
+h1{
+    text-align: center;
+}
+
+/*Especificidad: 001*/
+form{
+    padding: 1em;
+    border-radius: 1em;
+    color: #000;
+    background-color: darkgray;
+	margin: 0 auto;
+	
+    display: grid;
+	grid-gap: 10px;
+	
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    
+    max-width: 20em;
+}
+
+/*Especificidad: 001*/
+label{
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    grid-column-start: 1;
+    grid-column-end: 5;
+    justify-self: end;
+}
+
+/*Especificidad: 011*/
+input[type=button]{
+    border-radius: 0.5em;
+    height: 3em;
+}
+
+
+/* PANTALLA */
+/*Especificidad: 011*/
+input[type=text]{
+	grid-column: 1/5;
+    height: 5em;
+    word-wrap: break-word;
+    padding: 0.5em;
+}
+
+/*Especificidad: 021*/
+input[type=button][value="x"],
+input[type=button][value="/"],
+input[type=button][value="-"],
+input[type=button][value="+"]{
+	background-color: rgb(226, 58, 15);
+}
+
+/*Especificidad: 021*/
+input[type=button][value="mrc"],
+input[type=button][value="m+"],
+input[type=button][value="C"],
+input[type=button][value="m-"]{
+	background-color: cornflowerblue;
+}

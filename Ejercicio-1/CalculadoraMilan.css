@@ -34,7 +34,7 @@ label{
 }
 
 /*Especificidad: 011*/
-input[type=button]{
+button{
     border-radius: 0.5em;
     height: 3em;
 }
@@ -50,17 +50,17 @@ input[type=text]{
 }
 
 /*Especificidad: 021*/
-input[type=button][value="x"],
-input[type=button][value="/"],
-input[type=button][value="-"],
-input[type=button][value="+"]{
+button[name="x"],
+button[name="/"],
+button[name="-"],
+button[name="+"]{
 	background-color: rgb(226, 58, 15);
 }
 
 /*Especificidad: 021*/
-input[type=button][value="mrc"],
-input[type=button][value="m+"],
-input[type=button][value="C"],
-input[type=button][value="m-"]{
+button[name="mrc"],
+button[name="m+"],
+button[name="C"],
+button[name="m-"]{
 	background-color: cornflowerblue;
 }

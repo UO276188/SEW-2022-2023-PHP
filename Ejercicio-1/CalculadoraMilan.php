@@ -23,8 +23,6 @@ class CalculadoraMilan{
         $this->operador = "";
         $this->pantalla = "";
         $this->eval = false;
-        
-        // document.addEventListener('keydown', this.cargarBotones.bind(this));
 
         $this->lastOp ="";
         $this->lastOp1 ="";
@@ -35,12 +33,12 @@ class CalculadoraMilan{
         if ($this->eval){ //operacion ya evaluada
             $this->pantalla = "";
             $this->eval = false;
-            this.mostrarPantalla(); //TODO
+            // this.mostrarPantalla(); //TODO
         }
         
-        $this->pantalla .= String($numero);
+        $this->pantalla .= $numero;
         
-        this.mostrarPantalla();
+        // this.mostrarPantalla();
     }
     
     public function punto(){
@@ -52,14 +50,13 @@ class CalculadoraMilan{
 
     public function suma(){
         if ($this->operador != ""){
-            $this->op2 = new Number($this->pantalla);
-            $this->pantalla = eval($this->op1 + $this->operador + $this->op2); 
-            $this->op1 = new Number($this->pantalla);
+            $this->op2 = $this->pantalla;
+            $this->pantalla = eval($this->op1 . $this->operador . $this->op2); 
+            $this->op1 = $this->pantalla;
             $this->op2 = "";
             this.mostrarPantalla();
         } else{
-            $this->op1 = new Number ($this->pantalla);
-            
+            $this->op1 = $this->pantalla;
         }
         
         $this->eval = false;
@@ -116,7 +113,7 @@ class CalculadoraMilan{
     }
 
     public function masMenos(){
-        if ( $this-> != "") {
+        if ( $this->pantalla != "") {
             $this->pantalla = eval( $this->pantalla + '*-1');
             this.mostrarPantalla();
         }
@@ -147,12 +144,12 @@ class CalculadoraMilan{
         $this->eval = true;
     }
 
-    public functio mMenos(){
-        this.igual();
+    public function mMenos(){
+        $this->igual();
         $this->memoria -= $this->pantalla;
     }
     public function mMas(){
-        this.igual();
+        $this->igual();
         $this->memoria .= $this->pantalla;
     }
 
@@ -178,7 +175,7 @@ class CalculadoraMilan{
 
     public function igual(){
         if ($this->eval == false){
-            $this->op2 = new Number($this->pantalla);
+            $this->op2 = ($this->pantalla);
         } else{
             $this->op1 = $this->lastOp1;
             $this->op2 = $this->lastOp2;
@@ -186,9 +183,10 @@ class CalculadoraMilan{
         }
         
         try{
-            $this->pantalla = eval($this->op1 + $this->operador + '(' + $this->op2 +')');
+            $st = $this->op1 . $this->operador . '(' . $this->op2 . ');';
+            $this->pantalla = eval($st);
         } catch(err){
-            alert("Error = " + err);
+            alert("Error = " . err);
             $this->pantalla="0";
         }
 
@@ -199,7 +197,7 @@ class CalculadoraMilan{
         
     
         //TODO decimales : multiplicar por el numero de decimales y luego dividir
-        $this->pantalla = new Number($this->pantalla);
+        $this->pantalla = ($this->pantalla);
         this.mostrarPantalla();
 
         $this->eval = true;
@@ -208,10 +206,49 @@ class CalculadoraMilan{
         $this->operador = "";
     }
 
+    public function mostrarPantalla(){
+        return $this->pantalla;
+    }
+
+}
+
+if(count($_POST)>0){
+    $calc = $_SESSION['calculadora'];
+
+    if(isset($_POST['C'])) $calc->borrar();
+    if(isset($_POST['CE'])) $calc->CE();
+    if(isset($_POST['raiz'])) $calc->raiz();
+    if(isset($_POST['porcentaje'])) $calc->porcentaje();
+    
+    if(isset($_POST['mrc'])) $calc->mrc();
+    if(isset($_POST['m-'])) $calc->mMenos();
+    if(isset($_POST['m+'])) $calc->mMas();
+    if(isset($_POST['/'])) $calc->division();
+
+    if(isset($_POST['numero7'])) $calc->digitos(7);
+    if(isset($_POST['numero8'])) $calc->digitos(8);
+    if(isset($_POST['numero9'])) $calc->digitos(9);
+    if(isset($_POST['x'])) $calc->multiplicacion();
+
+    if(isset($_POST['numero4'])) $calc->digitos(4);
+    if(isset($_POST['numero5'])) $calc->digitos(5);
+    if(isset($_POST['numero6'])) $calc->digitos(6);
+    if(isset($_POST['-'])) $calc->resta();
+
+    if(isset($_POST['numero1'])) $calc->digitos(1);
+    if(isset($_POST['numero2'])) $calc->digitos(2);
+    if(isset($_POST['numero3'])) $calc->digitos(3);
+    if(isset($_POST['+'])) $calc->suma();
+
+    if(isset($_POST['numero0'])) $calc->digitos(0);
+    if(isset($_POST['punto'])) $calc->punto();
+    if(isset($_POST['igual'])) $calc->igual();
+    if(isset($_POST['masMenos'])) $calc->masMenos();
+
+    $_SESSION['calculadora'] = $calc;
 }
 
 if(!isset($_SESSION['calculadora'])){
-    
     $calculadoraMilan = new CalculadoraMilan();
     $_SESSION['calculadora'] = $calculadoraMilan;
 }
@@ -231,42 +268,40 @@ if(!isset($_SESSION['calculadora'])){
 <body>
     <h1>Calculadora Básica</h1>
     
-    <form target="#" action="POST">
+    <form action='#' method='POST'>
         
         <label for="Label">MILAN</label>
-        <input type="text" id="Label" value ="<?$echo calculadora.getPantalla()?>" disabled>
+        <input type="text" id="Label" value="<?php echo $_SESSION['calculadora']->mostrarPantalla();?>" disabled>
 
-        <input type="button" value="C" onclick="calculadora.borrar()"> <!--C=Borrar-->
-        <input type="button" value="CE" onclick="calculadora.CE()"> <!--CE-->
-        <input type="button" value="&radic;" onclick="calculadora.raiz()"> <!--RAÍZ CUADRADA-->
-        <input type="button" value="%" onclick="calculadora.porcentaje()">
+        <button type="submit" name="C">C</button>
+        <button type="submit" name="CE">CE</button>
+        <button type="submit" name="raiz">&radic;</button>
+        <button type="submit" name="porcentaje">%</button>
 
-        <input type="button" value="mrc" onclick="calculadora.mrc()">
-        <input type="button" value="m-" onclick="calculadora.mMenos()"> 
-        <input type="button" value="m+" onclick="calculadora.mMas()">
-        <input type="button" value="/" onclick="calculadora.division()">
+        <button type="submit" name="mrc">mrc</button>
+        <button type="submit" name="m-">m-</button>
+        <button type="submit" name="m+">m+</button>
+        <button type="submit" name="/">/</button>
 
-        <input type="button" value="7" onclick="calculadora.digitos(7)">
-        <input type="button" value="8" onclick="calculadora.digitos(8)">
-        <input type="button" value="9" onclick="calculadora.digitos(9)">
-        <input type="button" value="x" onclick="calculadora.multiplicacion()">
+        <button type="submit" name="numero7">7</button>
+        <button type="submit" name="numero8">8</button>
+        <button type="submit" name="numero9">9</button>
+        <button type="submit" name="x">x</button>
 
-        <input type="button" value="4" onclick="calculadora.digitos(4)">
-        <input type="button" value="5" onclick="calculadora.digitos(5)">
-        <input type="button" value="6" onclick="calculadora.digitos(6)">
-        <input type="button" value="-" onclick="calculadora.resta()">
+        <button type="submit" name="numero4">4</button>
+        <button type="submit" name="numero5">5</button>
+        <button type="submit" name="numero6">6</button>
+        <button type="submit" name="-">-</button>
 
-        <input type="button" value="1" onclick="calculadora.digitos(1)">
-        <input type="button" value="2" onclick="calculadora.digitos(2)">
-        <input type="button" value="3" onclick="calculadora.digitos(3)">
-        <input type="button" value="+" onclick="calculadora.suma()">
+        <button type="submit" name="numero1">1</button>
+        <button type="submit" name="numero2">2</button>
+        <button type="submit" name="numero3">3</button>
+        <button type="submit" name="+">+</button>
 
-        <input type="button" value="0" onclick="calculadora.digitos(0)">
-        <input type="button" value="." onclick="calculadora.punto()">
-        <input type="button" value="=" onclick="calculadora.igual()">
-        <input type="button" value="+/-" onclick="calculadora.masMenos()"> 
-
-         
+        <button type="submit" name="numero0">0</button>
+        <button type="submit" name="punto">.</button>
+        <button type="submit" name="igual">=</button>
+        <button type="submit" name="masMenos">+/-</button>
     </form>
 
 </body>

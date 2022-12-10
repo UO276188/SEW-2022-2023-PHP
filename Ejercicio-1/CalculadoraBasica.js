@@ -4,7 +4,6 @@ class Calculadora{
     constructor(){
         this.memoria= 0 ;
 
-        
         this.op1 = "";
         this.op2 = "";
         this.operador = "";

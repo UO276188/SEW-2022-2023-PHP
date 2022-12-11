@@ -9,6 +9,7 @@ class CalculadoraMilan{
     protected $op2;
     protected $operador;
     protected $pantalla;
+    protected $pantalla_aux;
     protected $eval;
     protected $lastOp;
     protected $lastOp1;
@@ -21,7 +22,8 @@ class CalculadoraMilan{
         $this->op1 = "";
         $this->op2 = "";
         $this->operador = "";
-        $this->pantalla = "";
+        $this->pantalla = "0";
+        $this->pantalla_aux = "";
         $this->eval = false;
 
         $this->lastOp ="";
@@ -31,114 +33,113 @@ class CalculadoraMilan{
 
     public function digitos($numero){
         if ($this->eval){ //operacion ya evaluada
-            $this->pantalla = "";
+            $this->pantalla_aux = "";
             $this->eval = false;
-            // this.mostrarPantalla(); //TODO
         }
         
-        $this->pantalla .= $numero;
+        $this->pantalla_aux .= $numero;
         
-        // this.mostrarPantalla();
+        $this->pantalla = $this->pantalla_aux;
     }
     
     public function punto(){
-        $this->pantalla .= ".";
-        this.mostrarPantalla();
+        $this->pantalla_aux .= ".";
+        $this->pantalla = $this->pantalla_aux;
     }
 
     // OPERACIONES -------------------------------------------------------------------------------
 
     public function suma(){
         if ($this->operador != ""){
-            $this->op2 = $this->pantalla;
-            $this->pantalla = eval($this->op1 . $this->operador . $this->op2); 
-            $this->op1 = $this->pantalla;
+            $this->op2 = $this->pantalla_aux;
+            $this->pantalla_aux = eval("return " . $this->op1 . $this->operador . $this->op2 . ';'); 
+            $this->op1 = $this->pantalla_aux;
             $this->op2 = "";
-            this.mostrarPantalla();
+            $this->pantalla = $this->pantalla_aux;
         } else{
-            $this->op1 = $this->pantalla;
+            $this->op1 = $this->pantalla_aux;
         }
         
         $this->eval = false;
-        $this->pantalla = "";
+        $this->pantalla_aux = "";
         $this->operador = "+";
     }
 
     public function resta(){
         if ($this->operador != ""){
-            $this->op2 = new Number($this->pantalla);
-            $this->pantalla = eval($this->op1 + $this->operador + $this->op2); 
-            $this->op1 = new Number($this->pantalla);
+            $this->op2 = $this->pantalla_aux;
+            $this->pantalla_aux = eval("return " . $this->op1 . $this->operador . $this->op2 .';'); 
+            $this->op1 = $this->pantalla_aux;
             $this->op2 = "";
-            this.mostrarPantalla();
+            $this->pantalla = $this->pantalla_aux;
         } else{
-            $this->op1 =  new Number($this->pantalla);
+            $this->op1 =  $this->pantalla_aux;
         }
        
         $this->eval = false;
-        $this->pantalla = "";
+        $this->pantalla_aux = "";
         $this->operador = "-";
     }
 
     public function multiplicacion(){
         if ($this->operador != ""){
-            $this->op2 = new Number($this->pantalla);
-            $this->pantalla = eval($this->op1 + $this->operador + $this->op2); 
-            $this->op1 = new Number($this->pantalla);
+            $this->op2 = $this->pantalla_aux;
+            $this->pantalla_aux = eval("return " . $this->op1 . $this->operador . $this->op2 . ','); 
+            $this->op1 = $this->pantalla_aux;
             $this->op2 = "";
-            this.mostrarPantalla();
+            $this->pantalla = $this->pantalla_aux;
         } else{
-            $this->op1 = new Number ($this->pantalla);
+            $this->op1 = $this->pantalla_aux;
         }
         
         $this->eval = false;
-        $this->pantalla = "";
+        $this->pantalla_aux = "";
         $this->operador = "*";
     }
 
     public function division(){
         if ($this->operador != ""){
-            $this->op2 = new Number($this->pantalla);
-            $this->pantalla = eval($this->op1 + $this->operador + $this->op2); 
-            $this->op1 = new Number($this->pantalla);
+            $this->op2 = $this->pantalla_aux;
+            $this->pantalla_aux = eval("return " . $this->op1 . $this->operador . $this->op2 . ';'); 
+            $this->op1 = $this->pantalla_aux;
             $this->op2 = "";
-            this.mostrarPantalla();
+            $this->pantalla = $this->pantalla_aux;
         } else{
-            $this->op1 = new Number ($this->pantalla);
+            $this->op1 =$this->pantalla_aux;
         }
 
         $this->eval = false;
-        $this->pantalla = "";
+        $this->pantalla_aux = "";
         $this->operador = "/";
     }
 
     public function masMenos(){
-        if ( $this->pantalla != "") {
-            $this->pantalla = eval( $this->pantalla + '*-1');
-            this.mostrarPantalla();
+        if ( $this->pantalla_aux != "") {
+            $this->pantalla_aux = eval("return " . $this->pantalla_aux . '*-1;');
+            $this->pantalla = $this->pantalla_aux;
         }
     }
     
     public function raiz(){
-        $this->pantalla = eval(new Number($this->pantalla)**(1/2));
-        this.mostrarPantalla();
+        $this->pantalla_aux = eval("return " . $this->pantalla_aux**(1/2) . ';');
+        $this->pantalla = $this->pantalla_aux;
         $this->eval = true;
     }
     public function porcentaje(){
         if ($this->operador=="*" || $this->operador=="/"){
-            $this->pantalla =eval($this->pantalla + '/100');
+            $this->pantalla_aux =eval("return " . $this->pantalla_aux . '/100;');
         } else {
-            $this->pantalla = eval(new Number($this->pantalla) + '/100' + '*' + $this->op1);
+            $this->pantalla_aux = eval("return " . $this->pantalla_aux . '/100' . '*' . $this->op1 . ';');
         }
 
-        this.igual(); 
+        $this->igual(); 
     }
 
     // MEMORIAS -------------------------------------------------------------------------------
 
     public function mrc(){
-        $this->pantalla = $this->memoria;
-        this.mostrarPantalla();
+        $this->pantalla_aux = $this->memoria;
+        $this->pantalla = $this->pantalla_aux;
         
         $this->memoria = 0;
         $this->eval = true;
@@ -146,11 +147,11 @@ class CalculadoraMilan{
 
     public function mMenos(){
         $this->igual();
-        $this->memoria -= $this->pantalla;
+        $this->memoria = eval("return " . $this->memoria . '-' . $this->pantalla_aux . ';');
     }
     public function mMas(){
         $this->igual();
-        $this->memoria .= $this->pantalla;
+        $this->memoria = eval("return " . $this->memoria . '+' . $this->pantalla_aux . ';');
     }
 
     // BORRAR ------------------------------------------------------------------------------
@@ -158,24 +159,24 @@ class CalculadoraMilan{
         $this->op1 = "";
         $this->op2 = "";
         $this->operador = "";
-        $this->pantalla = "";
+        $this->pantalla_aux = "";
         
-        $this->pantalla = "0";
-        this.mostrarPantalla();
-        $this->pantalla = "";
+        $this->pantalla_aux = "0";
+        $this->pantalla = $this->pantalla_aux;
+        $this->pantalla_aux = "";
     }
 
     public function CE(){
-        $this->pantalla = "0";
-        this.mostrarPantalla();
-        $this->pantalla = "";
+        $this->pantalla_aux = "0";
+        $this->pantalla = $this->pantalla_aux;
+        $this->pantalla_aux = "";
     }
 
     // IGUAL ----------------------------------
 
     public function igual(){
         if ($this->eval == false){
-            $this->op2 = ($this->pantalla);
+            $this->op2 = $this->pantalla_aux;
         } else{
             $this->op1 = $this->lastOp1;
             $this->op2 = $this->lastOp2;
@@ -183,22 +184,23 @@ class CalculadoraMilan{
         }
         
         try{
-            $st = $this->op1 . $this->operador . '(' . $this->op2 . ');';
-            $this->pantalla = eval($st);
+            $st = $this->op1 . $this->operador .  $this->op2 . ';';
+            $this->pantalla_aux = eval("return $st");
         } catch(err){
             alert("Error = " . err);
-            $this->pantalla="0";
+            $this->pantalla_aux="0";
         }
 
         //save for the next igual
         $this->lastOp = $this->operador;
-        $this->lastOp1 = $this->pantalla;
+        $this->lastOp1 = $this->pantalla_aux;
         $this->lastOp2 = $this->op2;
         
     
         //TODO decimales : multiplicar por el numero de decimales y luego dividir
-        $this->pantalla = ($this->pantalla);
-        this.mostrarPantalla();
+       
+        $this->pantalla = $this->pantalla_aux;
+        
 
         $this->eval = true;
         $this->op1 = "";

@@ -1,0 +1,66 @@
+/*Especificidad: 001*/
+body {
+	background-color: #000;
+    color: #fff;
+}
+
+/*Especificidad: 001*/
+h1{
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    text-align: center;
+}
+
+/*Especificidad: 001*/
+form{
+    padding: 1em;
+    color: #000;
+    background-color: darkgray;
+	margin: 0 auto;
+	
+    display: grid;
+	grid-gap: 10px;
+	
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    
+    max-width: 40em;
+}
+
+/*Especificidad: 001*/
+label{
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    grid-column-start: 4;
+    grid-column-end: 6;
+    justify-self: end;
+    align-self: center;
+}
+
+/*Especificidad: 001*/
+button{
+    height: 3em;
+}
+
+
+/* PANTALLA */
+/*Especificidad: 011*/
+input[type=text]{
+	grid-column: 1/6;
+    height: 5em;
+    word-wrap: break-word;
+    padding: 0.5em;
+}
+
+/*Especificidad: 021*/
+button[name="x"],
+button[name="/"],
+button[name="-"],
+button[name="+"]{
+	background-color: rgb(226, 58, 15);
+}
+
+/*Especificidad: 021*/
+button[name="mrc"],
+button[name="m+"],
+button[name="C"],
+button[name="m-"]{
+	background-color: cornflowerblue;
+}

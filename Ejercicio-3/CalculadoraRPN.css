@@ -1,0 +1,88 @@
+/*Especificidad: 001*/
+body {
+	background-color: #000;
+    color: #fff;
+}
+
+/*Especificidad: 001*/
+h1{
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    text-align: center;
+}
+
+/*Especificidad: 001*/
+form{
+    padding: 1em;
+    border-radius: 1em;
+    background-color: darkgray;
+	margin: 0 auto;
+    color: #000;
+	
+    display: grid;
+	grid-gap: 10px;
+	
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    max-width: 20em;
+}
+
+/*Especificidad: 001*/
+label{
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    grid-column-start: 1;
+    grid-column-end: 6;
+    font-size: 0.75em;
+    justify-self: end;
+}
+
+/*Especificidad: 001*/
+textarea{
+    resize: none;
+    grid-column-start: 1;
+    grid-column-end: 6;
+}
+
+/*Especificidad: 011*/
+textarea:nth-child(1){
+    height: 10em;
+}
+
+/*Especificidad: 011*/
+textarea:nth-child(2){
+    height: 2.5em;
+}
+
+/*Especificidad: 001*/
+button{
+    border-radius: 0.5em;
+    height: 3em;
+}
+
+/*Especificidad: 021*/
+button[name="ENTER"]{
+    background-color: #5CF079;
+}
+
+
+/*Especificidad: 011*/
+button[name="x"],
+button[name="/"],
+button[name="-"],
+button[name="+"]{
+	background-color: #FFB6AF;
+}
+
+/*Especificidad: 011*/
+button[name="C"],
+button[name="CE"]{
+	background-color: #81C1CF;
+}
+
+/*Especificidad: 011*/
+button[name="sin"],
+button[name="asin"],
+button[name="cos"],
+button[name="acos"],
+button[name="tan"],
+button[name="atan"]{
+	background-color: #D291BC;
+}

@@ -636,7 +636,7 @@ if(!isset($_SESSION['calculadora'])){
     <h1>Calculadora Científica</h1>
     
     <form action='#' method='POST'>
-        <input type="text" id="Label" value = "<?php echo $_SESSION['calculadora']->mostrarPantalla();?>" disabled>
+        <input type="text" id="Label" value = "<?php echo $_SESSION['calculadora']->mostrarPantalla();?>" disabled />
         
         <button type="submit" name="DEG">DEG</button>
         <button type="submit" name="HYP">HYP</button>

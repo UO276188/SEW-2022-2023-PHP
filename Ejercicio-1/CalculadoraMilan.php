@@ -273,7 +273,7 @@ if(!isset($_SESSION['calculadora'])){
     <form action='#' method='POST'>
         
         <label for="Label">MILAN</label>
-        <input type="text" id="Label" value="<?php echo $_SESSION['calculadora']->mostrarPantalla();?>" disabled>
+        <input type="text" id="Label" value="<?php echo $_SESSION['calculadora']->mostrarPantalla();?>" disabled />
 
         <button type="submit" name="C">C</button>
         <button type="submit" name="CE">CE</button>

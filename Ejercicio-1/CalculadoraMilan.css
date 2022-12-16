@@ -54,6 +54,7 @@ button[name="x"],
 button[name="/"],
 button[name="-"],
 button[name="+"]{
+    color: #000;
 	background-color: rgb(226, 58, 15);
 }
 
@@ -62,5 +63,6 @@ button[name="mrc"],
 button[name="m+"],
 button[name="C"],
 button[name="m-"]{
+    color: #000;
 	background-color: cornflowerblue;
 }

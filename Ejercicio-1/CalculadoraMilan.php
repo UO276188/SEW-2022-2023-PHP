@@ -263,12 +263,12 @@ if(!isset($_SESSION['calculadora'])){
     <meta name ="author" content ="Sara María Ramírez Pérez" />
 	<meta name ="viewport" content ="width=device-width, initial-scale=1.0" />
 
-    <title>Calculadora milán</title>
+    <title>Calculadora Milán</title>
     
     <link rel="stylesheet" type="text/css" href="CalculadoraMilan.css" />
 </head>
 <body>
-    <h1>Calculadora Básica</h1>
+    <h1>Calculadora Milán</h1>
     
     <form action='#' method='POST'>
         

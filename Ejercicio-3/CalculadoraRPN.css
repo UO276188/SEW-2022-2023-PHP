@@ -57,7 +57,7 @@ button{
     height: 3em;
 }
 
-/*Especificidad: 021*/
+/*Especificidad: 011*/
 button[name="ENTER"]{
     color: #080808;
     background-color: #5CF079;

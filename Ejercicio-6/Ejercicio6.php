@@ -10,27 +10,35 @@ class BaseDatos{
 
     private $database;
 
+    private $operacion;
+
     public function __construct(){
         $this->usuario = "DBUSER2022";
         $this->host = "localhost";
         $this->password = "DBPSWD2022";
 
         $this->database = "sew_ejercicio6";
+
+        $this->operacion = "";
+    }
+
+    public function getOperacion(){
+        return $this->operacion;
     }
 
     public function crearBaseDatos(){
         $con = new mysqli($this->host, $this->usuario, $this->password);
                 
         if($con->connect_error) {
-            echo "<section><p>ERROR en la conexión: " . $con->connect_error . "</p></section>";  
+            $this->operacion =  "<section><h2>OPERACIÓN</h2><p>ERROR en la conexión: " . $con->connect_error . "</p></section>";  
         }  
 
         $sentencia = "CREATE DATABASE IF NOT EXISTS " . $this->database. " COLLATE utf8_spanish_ci";
 
         if($con->query($sentencia) === TRUE){
-            echo "<section><p>Base de datos creada con éxito</p></section>";
+            $this->operacion =  "<section><h2>OPERACIÓN</h2><p>Base de datos creada con éxito</p></section>";
         } else { 
-            echo "<section><p>ERROR en la creación de la Base de Datos: " . $con->error . "</p></section>";
+            $this->operacion =  "<section><h2>OPERACIÓN</h2><p>ERROR en la creación de la Base de Datos: " . $con->error . "</p></section>";
         }   
 
         $con->close();
@@ -40,7 +48,7 @@ class BaseDatos{
         $con = new mysqli($this->host, $this->usuario, $this->password);
                         
         if($con->connect_error) {
-            echo "<section><p>ERROR en la conexión: " . $con->connect_error . "</p></section>";  
+            $this->operacion =  "<section><h2>OPERACIÓN</h2><p>ERROR en la conexión: " . $con->connect_error . "</p></section>";  
         } 
     
         
@@ -65,10 +73,9 @@ class BaseDatos{
         )";
 
         if($con->query($tabla) === TRUE){
-            echo "<section><p>Tabla 'PruebasUsabilidad' creada con éxito.</p></section>";
+            $this->operacion =  "<section><h2>OPERACIÓN</h2><p>Tabla 'PruebasUsabilidad' creada con éxito.</p></section>";
         } else { 
-            echo "<section><p>ERROR en la creación de la tabla: " . $con->error . "</p></section>";
-            exit();
+            $this->operacion =  "<section><h2>OPERACIÓN</h2><p>ERROR en la creación de la tabla: " . $con->error . "</p></section>";
         }  
 
         $con->close();
@@ -78,7 +85,7 @@ class BaseDatos{
         $con = new mysqli($this->host, $this->usuario, $this->password);
                         
         if($con->connect_error) {
-            echo "<section><p>ERROR en la conexión: " . $con->connect_error . "</p></section>";  
+            $this->operacion =  "<section><h2>OPERACIÓN</h2><p>ERROR en la conexión: " . $con->connect_error . "</p></section>";  
         } 
 
         $con->select_db($this->database);
@@ -91,9 +98,9 @@ class BaseDatos{
         $preparedStmnt->execute();
 
         if($preparedStmnt->affected_rows > 0){
-            echo "<section><p>Filas insertadas: " . $preparedStmnt->affected_rows ."</p></section>";
+            $this->operacion =  "<section><h2>OPERACIÓN</h2><p>Filas insertadas: " . $preparedStmnt->affected_rows ."</p></section>";
         } else { 
-            echo "<section><p>ERROR en la insercción de filas</p></section>";
+            $this->operacion =  "<section><h2>OPERACIÓN</h2><p>ERROR en la insercción de filas</p></section>";
         }  
 
         $preparedStmnt->close();
@@ -104,7 +111,7 @@ class BaseDatos{
         $con = new mysqli($this->host, $this->usuario, $this->password);
                         
         if($con->connect_error) {
-            echo "<section><p>ERROR en la conexión: " . $con->connect_error . "</p></section>";  
+            $this->operacion =  "<section><h2>OPERACIÓN</h2><p>ERROR en la conexión: " . $con->connect_error . "</p></section>";  
         } 
 
         $con->select_db($this->database);
@@ -116,46 +123,30 @@ class BaseDatos{
         $result = $preparedStmntDni->get_result();
 
         if ($result->num_rows > 0){
-            $print = "<section><table>" .
-			"<caption>PruebasUsabilidad</caption>".  
-			"<tr>".
-			"<th scope=\"col\" id=\"dni\">DNI</th>".
-			"<th scope=\"col\" id=\"nombre\">Nombre</th>".
-			"<th scope=\"col\" id=\"apellidos\">Apellidos</th>".
-			"<th scope=\"col\" id=\"email\">Email</th>".
-			"<th scope=\"col\" id=\"telefono\">Telefono</th>".
-			"<th scope=\"col\" id=\"edad\">Edad</th>".
-			"<th scope=\"col\" id=\"sexo\">Sexo</th>".
-			"<th scope=\"col\" id=\"pericia_informatica\">Pericia</th>".
-			"<th scope=\"col\" id=\"tiempo\">Tiempo</th>".
-			"<th scope=\"col\" id=\"tarea_correcta\">Tarea correcta</th>".
-			"<th scope=\"col\" id=\"comentarios\">Comentarios</th>".
-			"<th scope=\"col\" id=\"propuesta_mejora\">Propuestas de mejora</th>".
-			"<th scope=\"col\" id=\"valoracion\">Valoración</th>".
-			"</tr>";
-
+            $print = "<section><h2>OPERACIÓN</h2><ul>";
+           
             while($row = $result->fetch_assoc()) {
-                $print .= "<tr>" .
-                "<td headers=\"dni\">". $row['DNI'] ."</td>" .
-                "<td headers=\"nombre\">". $row['nombre'] ."</td>" .
-                "<td headers=\"apellidos\">". $row['apellidos'] ."</td>" .
-                "<td headers=\"email\">". $row['email'] ."</td>" .
-                "<td headers=\"telefono\">". $row['telefono'] ."</td>" .
-                "<td headers=\"edad\">". $row['edad'] ."</td>" .
-                "<td headers=\"sexo\">". $row['sexo'] ."</td>" .
-                "<td headers=\"pericia_informatica\">". $row['pericia_informatica'] ."</td>" .
-                "<td headers=\"tiempo\">". $row['tiempo'] ."</td>" .
-                "<td headers=\"tarea_correcta\">". $row['tarea_correcta'] ."</td>" .
-                "<td headers=\"comentarios\">". $row['comentarios'] ."</td>" .
-                "<td headers=\"propuesta_mejora\">". $row['propuesta_mejora'] ."</td>" .
-                "<td headers=\"valoracion\">". $row['valoracion'] ."</td>" .
-                "</tr>";
+                $print .= "<li>DNI: " . $row['DNI'];
+                $print .=  "<ul>";
+                $print .=  "<li>Nombre: ". $row['nombre'] ."</li>";
+                $print .=  "<li>Apellidos: ". $row['apellidos'] ."</li>";
+                $print .=  "<li>Email: ". $row['email'] ."</li>";
+                $print .=  "<li>Telefono: ". $row['telefono'] ."</li>";
+                $print .=  "<li>Edad: ". $row['edad'] ."</li>";
+                $print .=  "<li>Sexo: ". $row['sexo'] ."</li>";
+                $print .=  "<li>Pericia: ". $row['pericia_informatica'] ."</li>";
+                $print .=  "<li>Tiempo: ". $row['tiempo'] ."</li>";
+                $print .=  "<li>Tarea realizada correctamente: ". $row['tarea_correcta'] ."</li>";
+                $print .=  "<li>Comentarios: ". $row['comentarios'] ."</li>";
+                $print .=  "<li>Propuestas de mejora: ". $row['propuesta_mejora'] ."</li>";
+                $print .=  "<li>Valoración: ". $row['valoracion'] ."</li>";
+                $print .= "</ul></li>";
             }
 
-            $print .= "</table></section>";
-            echo $print;
+            $print .= "</ul></section>";
+            $this->operacion =  $print;
         } else {
-            echo "<section><p>No se han encontrado coincidencias.</p></section>";
+            $this->operacion =  "<section><h2>OPERACIÓN</h2><p>No se han encontrado coincidencias.</p></section>";
         }
 
         $preparedStmntDni->close();
@@ -166,7 +157,7 @@ class BaseDatos{
         $con = new mysqli($this->host, $this->usuario, $this->password);
                         
         if($con->connect_error) {
-            echo "<section><p>ERROR en la conexión: " . $con->connect_error . "</p></section>";  
+            $this->operacion =  "<section><h2>OPERACIÓN</h2><p>ERROR en la conexión: " . $con->connect_error . "</p></section>";  
         }
 
         $con->select_db($this->database);
@@ -177,10 +168,10 @@ class BaseDatos{
 
         $result = $preparedStmntDni->get_result();
 
-        if ($result->num_rows > 0){
-            echo "<section><p>Fila modificada.</p></section>";
+        if ($result != false){
+            $this->operacion =  "<section><h2>OPERACIÓN</h2><p>Fila modificada.</p></section>";
         } else {
-            echo "<section><p>No se han encontrado coincidencias.</p></section>";
+            $this->operacion =  "<section><h2>OPERACIÓN</h2><p>No se han encontrado coincidencias.</p></section>";
         }
 
 
@@ -192,7 +183,7 @@ class BaseDatos{
         $con = new mysqli($this->host, $this->usuario, $this->password);
                         
         if($con->connect_error) {
-            echo "<section><p>ERROR en la conexión: " . $con->connect_error . "</p></section>";  
+            $this->operacion =  "<section><h2>OPERACIÓN</h2><p>ERROR en la conexión: " . $con->connect_error . "</p></section>";  
         }
 
         $con->select_db($this->database);
@@ -204,9 +195,9 @@ class BaseDatos{
         
 
         if($preparedStmntDni->affected_rows > 0){
-            echo "<section><p>Datos eliminados correctamente.</p></section>";
+            $this->operacion =  "<section><h2>OPERACIÓN</h2><p>Datos eliminados correctamente.</p></section>";
         } else { 
-            echo "<section><p>No se han podido eliminar los datos</p></section>";
+            $this->operacion =  "<section><h2>OPERACIÓN</h2><p>No se han podido eliminar los datos</p></section>";
         }  
         
 
@@ -226,7 +217,7 @@ class BaseDatos{
             $porcCorrecto = $this->porcentaje("tarea_correcta", "SI", $numeroTotalFilas);
             $puntuacionMedia = $this->media("valoracion");
 
-            $print = "<section> <p>Informe</p>" .
+            $print = "<section><h2>OPERACIÓN</h2> <p>Informe</p>" .
             "<ul>" . 
             "<li>Edad media: $edadMedia</li>" . 
             "<li>Frecuencia hombres: $porcH%</li>" . 
@@ -237,10 +228,10 @@ class BaseDatos{
             "<li>Puntuación media: $puntuacionMedia</li>" . 
             "</ul></section>";
 
-            echo $print;
+            $this->operacion =  $print;
 
         } else {
-            echo "<section><p>No hay datos que mostrar</p></section>";
+            $this->operacion =  "<section><h2>OPERACIÓN</h2><p>No hay datos que mostrar</p></section>";
         }       
     }
 
@@ -248,7 +239,7 @@ class BaseDatos{
         $con = new mysqli($this->host, $this->usuario, $this->password);
                         
         if($con->connect_error) {
-            echo "<section><p>ERROR en la conexión: " . $con->connect_error . "</p></section>";  
+            $this->operacion =  "<section><h2>OPERACIÓN</h2><p>ERROR en la conexión: " . $con->connect_error . "</p></section>";  
         }
 
         $con->select_db($this->database);
@@ -270,7 +261,7 @@ class BaseDatos{
         $con = new mysqli($this->host, $this->usuario, $this->password);
                         
         if($con->connect_error) {
-            echo "<section><p>ERROR en la conexión: " . $con->connect_error . "</p></section>";  
+            $this->operacion =  "<section><h2>OPERACIÓN</h2><p>ERROR en la conexión: " . $con->connect_error . "</p></section>";  
         }
 
         $con->select_db($this->database);
@@ -293,7 +284,7 @@ class BaseDatos{
         $con = new mysqli($this->host, $this->usuario, $this->password);
                         
         if($con->connect_error) {
-            echo "<section><p>ERROR en la conexión: " . $con->connect_error . "</p></section>";  
+            $this->operacion =  "<section><h2>OPERACIÓN</h2><p>ERROR en la conexión: " . $con->connect_error . "</p></section>";  
         }
 
         $con->select_db($this->database);
@@ -317,7 +308,7 @@ class BaseDatos{
         $con = new mysqli($this->host, $this->usuario, $this->password);
                 
         if($con->connect_error) {
-            echo "<section><p>ERROR en la conexión: " . $con->connect_error . "</p></section>";  
+            $this->operacion =  "<section><h2>OPERACIÓN</h2><p>ERROR en la conexión: " . $con->connect_error . "</p></section>";  
         }  
 
         $con->select_db($this->database);
@@ -343,7 +334,7 @@ class BaseDatos{
             }
             $preparedStmnt->close();
         }
-        echo "<section><p>Filas importadas: " . $lineasTotales . "</p></section>";  
+        $this->operacion =  "<section><h2>OPERACIÓN</h2><p>Filas importadas: " . $lineasTotales . "</p></section>";  
 
         $con->close();
     }
@@ -352,7 +343,7 @@ class BaseDatos{
         $con = new mysqli($this->host, $this->usuario, $this->password);
                 
         if($con->connect_error) {
-            echo "<section><p>ERROR en la conexión: " . $con->connect_error . "</p></section>";  
+            $this->operacion =  "<section><h2>OPERACIÓN</h2><p>ERROR en la conexión: " . $con->connect_error . "</p></section>";  
         }  
 
         $con->select_db($this->database);
@@ -370,7 +361,7 @@ class BaseDatos{
         $con->close();
 
         if (file_put_contents("pruebasUsabilidad.csv", $result) != false){
-            echo "<section><p>Archivo generado</p></section>"; 
+            $this->operacion =  "<section><h2>OPERACIÓN</h2><p>Archivo generado</p></section>"; 
         }
         
     }
@@ -417,6 +408,8 @@ if(count($_POST)>0){
         <a title="Cargar datos desde un archivo CSV en una tabla de la Base de Datos" accesskey="V" tabindex="8" href="#cargarDatos">Importar CSV</a>
         <a title="Exportar datos a un archivo en formato CSV los datos desde una tabla de la Base de Datos" accesskey="X" tabindex="9" href="#exportarDatos">Exportar a CSV</a>
     </nav>
+
+    <?php echo $db->getOperacion(); ?>
 
 
     <section> <a id="crearBase"></a>
@@ -603,6 +596,8 @@ if(count($_POST)>0){
             <button type="submit" name="exportarDatos">Exportar datos</button>
 		</form>
     </section>
+
+    
 
 
 </body>

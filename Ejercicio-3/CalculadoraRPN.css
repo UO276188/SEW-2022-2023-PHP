@@ -59,6 +59,7 @@ button{
 
 /*Especificidad: 021*/
 button[name="ENTER"]{
+    color: #080808;
     background-color: #5CF079;
 }
 
@@ -68,12 +69,14 @@ button[name="x"],
 button[name="/"],
 button[name="-"],
 button[name="+"]{
+    color: #080808;
 	background-color: #FFB6AF;
 }
 
 /*Especificidad: 011*/
 button[name="C"],
 button[name="CE"]{
+    color: #080808;
 	background-color: #81C1CF;
 }
 
@@ -84,5 +87,6 @@ button[name="cos"],
 button[name="acos"],
 button[name="tan"],
 button[name="atan"]{
+    color: #080808;
 	background-color: #D291BC;
 }

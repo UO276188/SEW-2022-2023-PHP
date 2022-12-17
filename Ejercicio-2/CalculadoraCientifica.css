@@ -49,18 +49,20 @@ input[type=text]{
     padding: 0.5em;
 }
 
-/*Especificidad: 021*/
+/*Especificidad: 011*/
 button[name="x"],
 button[name="/"],
 button[name="-"],
 button[name="+"]{
 	background-color: rgb(226, 58, 15);
+    color: #080808;
 }
 
-/*Especificidad: 021*/
+/*Especificidad: 011*/
 button[name="mrc"],
 button[name="m+"],
 button[name="C"],
 button[name="m-"]{
 	background-color: cornflowerblue;
+    color: #080808;
 }

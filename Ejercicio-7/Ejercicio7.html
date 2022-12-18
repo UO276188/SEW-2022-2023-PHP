@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="es"><head>
+    <meta charset="UTF-8">
+    <title>SEW - Ejercicio 7</title>
+    <meta name="author" content="Sara María Ramírez Pérez">
+    <!--Definición de la ventana gráfica-->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="stylesheet" type="text/css" href="Ejercicio7.css">
+</head>
+<body>
+    <h1>Cambio de ruedas</h1>
+
+    <nav>
+        <a title="Iniciar Base de Datos" accesskey="C" tabindex="1" href="#crearBase">Crear base de datos</a>
+        <a title="Sustituciones" accesskey="S" tabindex="2" href="#sustituciones">Sustituciones</a>
+        <a title="Mecanicos" accesskey="M" tabindex="3" href="#mecanico">Mecanicos</a>
+        <a title="Ruedas" accesskey="R" tabindex="4" href="#rueda">Ruedas</a>
+    </nav>
+
+
+    <section> <a id="crearBase"></a>
+        <h2>Iniciar Base de Datos</h2>
+        <p>Al pusar el botón se creará la base de datos "sew_ejercicio7", y sus tablas correspondientes.</p>
+        <form action="#" method="POST">
+            <button type="submit" name="crearBase">Crear base de datos</button>
+		</form>
+    </section> 
+
+    <section> <a id="sustituciones"></a>
+        <h2>Sustituciones</h2>
+        <table><caption>Sustituciones</caption><tbody><tr><th scope="col" id="fecha">FECHA</th><th scope="col" id="motoS">MOTO</th><th scope="col" id="rDelantera">RUEDA DELANTERA</th><th scope="col" id="rTrasera">RUEDA TRASERA</th><th scope="col" id="descripcionS">DESCRIPCION</th><th scope="col" id="mecanicoS">MECANICO</th><th scope="col" id="precioS">PRECIO</th><th scope="col" id="estado">ESTADO CAMBIO</th><th scope="col" id="pago">ESTADO PAGO</th></tr><tr><td headers="fecha">2020-12-20</td><td headers="motoS">0675FJS</td><td headers="rDelantera">45df</td><td headers="rTrasera">45df</td><td headers="descripcionS">mal estado</td><td headers="mecanicoS">74586523F</td><td headers="precioS">324</td><td headers="estado">ACABADO</td><td headers="pago">PENDIENTE</td></tr><tr><td headers="fecha">2022-09-12</td><td headers="motoS">0675FJS</td><td headers="rDelantera">8d45</td><td headers="rTrasera">45df</td><td headers="descripcionS">Desgaste</td><td headers="mecanicoS">54862358H</td><td headers="precioS">289.2</td><td headers="estado">ACABADO</td><td headers="pago">PAGADO</td></tr><tr><td headers="fecha">2022-09-25</td><td headers="motoS">7458DHV</td><td headers="rDelantera">68l4</td><td headers="rTrasera">g47h</td><td headers="descripcionS">Se necesita equilibrar</td><td headers="mecanicoS">54862358H</td><td headers="precioS">208.8</td><td headers="estado">ACABADO</td><td headers="pago">PAGADO</td></tr><tr><td headers="fecha">2022-12-14</td><td headers="motoS">4865NWJ</td><td headers="rDelantera">8d45</td><td headers="rTrasera">g47h</td><td headers="descripcionS">Rueda delantera torcida</td><td headers="mecanicoS">74586523F</td><td headers="precioS">228</td><td headers="estado">PENDIENTE</td><td headers="pago">PAGADO</td></tr><tr><td headers="fecha">2022-12-16</td><td headers="motoS">0675FJS</td><td headers="rDelantera">45df</td><td headers="rTrasera">45df</td><td headers="descripcionS">mal estado</td><td headers="mecanicoS">74586523F</td><td headers="precioS">324</td><td headers="estado">ACABADO</td><td headers="pago">PAGADO</td></tr></tbody></table>        <form action="#" method="POST">
+            <button type="submit" name="parte">Descargar parte de trabajo</button>
+		</form>
+        <h3>Modificar estado de sustitución</h3>
+        <form action="#" method="POST">
+            <p>
+				<label for="cambiar_estado_fecha">Fecha:</label>
+				<input type="text" id="cambiar_estado_fecha" name="cambiar_estado_fecha">
+			</p>
+            <p>
+				<label for="cambiar_estado_moto">Moto:</label>
+				<input type="text" id="cambiar_estado_moto" name="cambiar_estado_moto">
+			</p>
+            <p>
+				<label for="cambiar_estado_new">Nuevo estado:</label>
+                <select name="cambiar_estado_new" id="cambiar_estado_new">
+                    <option value="PENDIENTE">Pendiente</option>
+                    <option value="ACABADO">Acabado</option>
+                </select>
+			</p>
+            <button type="submit" name="cambiarEstado">Modificar</button>
+		</form>
+
+        <h3>Modificar estado pago</h3>
+        <form action="#" method="POST">
+            <p>
+				<label for="cambiar_pago_fecha">Fecha:</label>
+				<input type="text" id="cambiar_pago_fecha" name="cambiar_pago_fecha">
+			</p>
+            <p>
+				<label for="cambiar_pago_moto">Moto:</label>
+				<input type="text" id="cambiar_pago_moto" name="cambiar_pago_moto">
+			</p>
+            <p>
+				<label for="cambiar_pago_new">Nuevo estado:</label>
+                <select name="cambiar_pago_new" id="cambiar_pago_new">
+                    <option value="PENDIENTE">Pendiente</option>
+                    <option value="PAGADO">Pagado</option>
+                </select>
+			</p>
+            
+            <button type="submit" name="cambiarPago">Modificar</button>
+		</form>
+
+        <h3>Añadir sustitución</h3>
+        <form action="#" method="POST">
+            <p>
+				<label for="añadir_sustitucion_fecha">Fecha:</label>
+				<input type="text" id="añadir_sustitucion_fecha" name="añadir_sustitucion_fecha">
+			</p>
+            <p>
+				<label for="añadir_sustitucion_moto">Moto:</label>
+				<input type="text" id="añadir_sustitucion_moto" name="añadir_sustitucion_moto">
+			</p>
+            <p>
+				<label for="añadir_sustitucion_delantera">Rueda delantera:</label>
+				<input type="text" id="añadir_sustitucion_delantera" name="añadir_sustitucion_delantera">
+			</p>
+            <p>
+				<label for="añadir_sustitucion_trasera">Rueda trasera:</label>
+				<input type="text" id="añadir_sustitucion_trasera" name="añadir_sustitucion_trasera">
+			</p>
+            <p>
+				<label for="añadir_sustitucion_descripcion">Descripción:</label>
+				<input type="text" id="añadir_sustitucion_descripcion" name="añadir_sustitucion_descripcion">
+			</p>
+            <p>
+				<label for="añadir_sustitucion_mecanico">Mecánico:</label>
+				<input type="text" id="añadir_sustitucion_mecanico" name="añadir_sustitucion_mecanico">
+			</p>
+        
+            <button type="submit" name="añadirSustitucion">Añadir</button>
+		</form>
+    </section> 
+ 
+    <section> <a id="mecanico"></a>
+        <h2>Mecanicos</h2>
+        <table><caption>Mecánicos</caption><tbody><tr><th scope="col" id="dniM">DNI</th><th scope="col" id="nombreM">NOMBRE</th><th scope="col" id="apellidosM">APELLIDOS</th></tr><tr><td headers="dniM">54862358H</td><td headers="nombreM">Pedro</td><td headers="apellidosM">Bermudez Igual</td></tr><tr><td headers="dniM">74586523F</td><td headers="nombreM">Carlos</td><td headers="apellidosM">Rodriguez Gonzalez</td></tr></tbody></table>        <h3>Eliminar mecánico</h3>
+        <form action="#" method="POST">
+            <p>
+				<label for="eliminar_mecanico_dni">DNI:</label>
+				<input type="text" id="eliminar_mecanico_dni" name="eliminar_mecanico_dni">
+			</p>
+            <button type="submit" name="eliminarMecanico">Eliminar</button>
+		</form>
+        <h3>Añadir mecánico</h3>
+        <form action="#" method="POST">
+            <p>
+				<label for="añadir_mecanico_dni">DNI:</label>
+				<input type="text" id="añadir_mecanico_dni" name="añadir_mecanico_dni">
+			</p>
+            <p>
+				<label for="añadir_mecanico_nombre">Nombre:</label>
+				<input type="text" id="añadir_mecanico_nombre" name="añadir_mecanico_nombre">
+			</p>
+            <p>
+				<label for="añadir_mecanico_apellidos">Apellidos:</label>
+				<input type="text" id="añadir_mecanico_apellidos" name="añadir_mecanico_apellidos">
+			</p>
+            <button type="submit" name="añadirMecanico">Añadir</button>
+		</form>
+    </section>
+
+    <section> <a id="rueda"></a>
+        <h2>Ruedas</h2>
+        <table><caption>Ruedas</caption><tbody><tr><th scope="col" id="codigo">CODIGO</th><th scope="col" id="fabricante">FABRICANTE</th><th scope="col" id="tipo">TIPO</th><th scope="col" id="ancho">ANCHO</th><th scope="col" id="altura">ALTURA</th><th scope="col" id="estructura">ESTRUCTURA</th><th scope="col" id="diametro">DIÁMETRO</th><th scope="col" id="carga">CARGA</th><th scope="col" id="velocidad">VELOCIDAD</th><th scope="col" id="precio">PRECIO</th></tr><tr><td headers="codigo">45df</td><td headers="fabricante">Michelin</td><td headers="tipo">PilotRoad4</td><td headers="ancho">160</td><td headers="altura">60</td><td headers="estructura">R</td><td headers="diametro">17</td><td headers="carga">69</td><td headers="velocidad">W</td><td headers="precio">135</td></tr><tr><td headers="codigo">68l4</td><td headers="fabricante">Michelin</td><td headers="tipo">PilotSport</td><td headers="ancho">120</td><td headers="altura">70</td><td headers="estructura">R</td><td headers="diametro">17</td><td headers="carga">75</td><td headers="velocidad">W</td><td headers="precio">90</td></tr><tr><td headers="codigo">8d45</td><td headers="fabricante">Michelin</td><td headers="tipo">PilotRoad3</td><td headers="ancho">110</td><td headers="altura">80</td><td headers="estructura">R</td><td headers="diametro">19</td><td headers="carga">59</td><td headers="velocidad">V</td><td headers="precio">106</td></tr><tr><td headers="codigo">g47h</td><td headers="fabricante">Michelin</td><td headers="tipo">PilotPower</td><td headers="ancho">180</td><td headers="altura">55</td><td headers="estructura">R</td><td headers="diametro">17</td><td headers="carga">73</td><td headers="velocidad">W</td><td headers="precio">84</td></tr></tbody></table>        <h3>Eliminar ruedas</h3>
+        <form action="#" method="POST">
+            <p>
+				<label for="eliminar_rueda_codigo">Codigo:</label>
+				<input type="text" id="eliminar_rueda_codigo" name="eliminar_rueda_codigo">
+			</p>
+            <button type="submit" name="eliminarRueda">Eliminar</button>
+		</form>
+
+        <h3>Añadir rueda</h3>
+        <form action="#" method="POST">
+            <p>
+				<label for="añadir_rueda_codigo">Codigo:</label>
+				<input type="text" id="añadir_rueda_codigo" name="añadir_rueda_codigo">
+			</p>
+            <p>
+				<label for="añadir_rueda_fabricante">Fabricante:</label>
+				<input type="text" id="añadir_rueda_fabricante" name="añadir_rueda_fabricante">
+			</p>
+            <p>
+				<label for="añadir_rueda_tipo">Tipo:</label>
+				<input type="text" id="añadir_rueda_tipo" name="añadir_rueda_tipo">
+			</p>
+            <p>
+				<label for="añadir_rueda_ancho">Ancho:</label>
+				<input type="number" id="añadir_rueda_ancho" name="añadir_rueda_ancho">
+			</p>
+            <p>
+				<label for="añadir_rueda_alto">Alto:</label>
+				<input type="number" id="añadir_rueda_alto" name="añadir_rueda_alto">
+			</p>
+            <p>
+				<label for="añadir_rueda_estructura">Estructura:</label>
+				<input type="text" id="añadir_rueda_estructura" name="añadir_rueda_estructura">
+			</p>
+            <p>
+				<label for="añadir_rueda_diametro">Diametro:</label>
+				<input type="number" id="añadir_rueda_diametro" name="añadir_rueda_diametro">
+			</p>
+            <p>
+				<label for="añadir_rueda_carga">Carga:</label>
+				<input type="number" id="añadir_rueda_carga" name="añadir_rueda_carga">
+			</p>
+            <p>
+				<label for="añadir_rueda_velocidad">Velocidad:</label>
+				<input type="text" id="añadir_rueda_velocidad" name="añadir_rueda_velocidad">
+			</p>
+            <p>
+				<label for="añadir_rueda_precio">Precio:</label>
+				<input type="number" step="0.01" id="añadir_rueda_precio" name="añadir_rueda_precio">
+			</p>
+            <button type="submit" name="añadirRueda">Añadir</button>
+		</form>
+    </section>
+
+
+
+
+</body></html>

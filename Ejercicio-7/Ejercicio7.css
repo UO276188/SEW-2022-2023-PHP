@@ -1,0 +1,98 @@
+/*Especificidad: 001*/
+body {
+	font-family: Georgia, Thaoma, serif;
+	color: #545454;
+	background-color: #fff;
+	justify-self: stretch;
+}
+
+/*Especificidad: 001*/
+h1 {
+	color: #E3E3E3;    
+	background-color:#064260; 
+	text-transform: uppercase;
+	padding: 2em; 
+}
+/*Especificidad: 001*/ 
+h2 {
+	color: #E3E3E3;
+	background-color:#670A30; 
+	padding: 0.5em;
+}
+
+/*Especificidad: 001*/ 
+h3 {
+	color: #E3E3E3;
+	background-color:#064260; 
+	padding: 0.2em;
+}
+
+/*Especificidad: 002*/
+body nav {
+	background-color: #FDEAF2;
+	color: black;
+	padding: 0.5em;
+}
+
+
+/*Especificidad: 002*/
+nav a{
+	background-color: #FDEAF2;
+	color: black;
+	padding: 0.5em;
+	font-size: 1em;
+}
+
+/*Especificidad: 012*/
+nav a:hover {
+	color: #FDEAF2;
+	background-color: #670A30;
+}
+/*Especificidad: 002*/
+body footer{
+	background-color: #063851;
+	color: #C4C4C4;
+}	
+/*Especificidad: 004*/
+body main pre code{
+	color: #000;
+	background-color: rgb(240, 230, 230);
+}
+/*Especificidad: 001*/
+li {
+	list-style-type: square;
+}
+
+/*Especificidad: 001*/
+table {
+	width: 80%;
+	border-collapse: collapse;
+}
+/*Especificidad: 001*/
+table, th, td {
+	border: 0.15em;
+	border-style: solid;
+	border-color: #000001;
+}
+/*Especificidad: 001*/
+th, td {
+	padding: 1em;
+}
+/*Especificidad: 001*/
+th{
+	color: #545454;
+	background-color: #f7f7f7;
+}
+/*Especificidad: 002*/
+table caption {
+	font-size: 2em; 
+}
+/*Especificidad: 001*/
+button{
+	background-color: #E3E3E3;
+	color: #670A30;
+	border-color: #670A30;
+	border-radius: 0.5em;
+	padding: 0.5em;
+	font-size: 1em;
+}

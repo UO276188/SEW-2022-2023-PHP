@@ -110,11 +110,7 @@ form p{
 }
 
 /*Especificidad: 001*/
-select{
+select, input{
 	font-size: 1.25em;
 }
 
-/*Especificidad: 001*/
-input{
-	font-size: 1.25em;
-}

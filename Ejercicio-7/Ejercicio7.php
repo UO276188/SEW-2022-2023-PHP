@@ -450,6 +450,7 @@ if(count($_POST)>0){
         <form action='#' method='POST'>
             <button type="submit" name="parte">Descargar parte de trabajo</button>
 		</form>
+
         <h3>Modificar estado de sustitución</h3>
         <form action='#' method='POST'>
             <p>
@@ -525,7 +526,9 @@ if(count($_POST)>0){
     <section> <a id="mecanico"></a>
         <h2>Mecanicos</h2>
         <?php echo $db->mecanicos(); ?>
+
         <h3>Eliminar mecánico</h3>
+        <p>Solo se podrán eliminar mechanicos que no tengan asignada ninguna sustitución.</p>
         <form action='#' method='POST'>
             <p>
 				<label for="eliminar_mecanico_dni">DNI:</label>
@@ -533,6 +536,7 @@ if(count($_POST)>0){
 			</p>
             <button type="submit" name="eliminarMecanico">Eliminar</button>
 		</form>
+
         <h3>Añadir mecánico</h3>
         <form action='#' method='POST'>
             <p>
@@ -554,7 +558,9 @@ if(count($_POST)>0){
     <section> <a id="rueda"></a>
         <h2>Ruedas</h2>
         <?php echo $db->ruedas(); ?>
+
         <h3>Eliminar ruedas</h3>
+        <p>Solo se podrán eliminar ruedas que no hayan sido usadas en ninguna sustitución.</p>
         <form action='#' method='POST'>
             <p>
 				<label for="eliminar_rueda_codigo">Codigo:</label>

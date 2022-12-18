@@ -74,6 +74,7 @@ table, th, td {
 	border: 0.15em;
 	border-style: solid;
 	border-color: #000001;
+	font-size: 1.05em;
 }
 /*Especificidad: 001*/
 th, td {
